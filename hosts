@@ -1,0 +1,10 @@
+#webserver
+34.192.151.138 ansible_user=ubuntu
+#apps
+44.198.105.77 ansible_user=ubuntu
+#db
+52.207.158.23 ansible_user=ubuntu
+#CI/CD
+54.92.233.212 ansible_user=ubuntu
+#Monitoring
+204.236.226.148 ansible_user=ubuntu

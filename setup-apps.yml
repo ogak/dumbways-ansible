@@ -1,0 +1,23 @@
+---
+- name: Setup Frontend & Backend
+  hosts: 44.198.105.77
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+
+    - name: Clone Dumplay Apps
+      shell: "git clone https://github.com/ogak/dumbplay-frontend.git dumbsound"
+      args:
+        executable: /bin/bash
+    
+    - name: Clone Backend Apps
+      shell: "git clone https://github.com/ogak/dumbplay-backend.git backendsound"
+      args:
+        executable: /bin/bash
+    

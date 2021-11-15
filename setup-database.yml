@@ -1,0 +1,16 @@
+---
+- name: Setup Database
+  hosts: 52.207.158.23
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+    
+    - name: Install Mysql-Server
+      apt:
+        name: mysql-server
+        state: present
