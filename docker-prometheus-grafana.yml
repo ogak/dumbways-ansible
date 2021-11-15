@@ -1,0 +1,54 @@
+---
+- name: Installing Prometheus & Grafana
+  hosts: 204.236.226.148
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+    
+    - name: Copying docker compose file
+      copy:
+        src: docker-prometheus-grafana
+        dest: /home/ubuntu/
+    
+    - name: Copying prometheus.yml file
+      copy:
+        src: files/prometheus.yml
+        dest: /home/ubuntu/
+    
+    - name: Run compose up 
+      shell:
+        cmd: "docker-compose -f docker-compose.yml up -d"
+        chdir: /home/ubuntu/docker-prometheus-grafana/
+    
+    - name: Change grafana folder permission
+      shell: "sudo chown 1000:1000 grafana/data/"
+      args:
+        executable: /bin/bash
+
+    # - name: Pip install docker-compose
+    #   shell: pip install docker-compose
+    #   args:
+    #     executable: /bin/bash
+    
+    # - name: Run docker compose
+    #   community.docker.docker_compose:
+    #     project_src: /home/ubuntu/docker-prometheus-grafana
+    #     files:
+    #       - docker-compose.yml
+        
+    # - name: Get the docker compose file
+    #   shell: cd docker-prometheus-grafana/
+    #   args:
+    #     executable: /bin/bash
+
+    # - name: Run docker compose
+    #   shell: "docker-compose -f docker-compose.yml up -d"
+    #   args:
+    #     executable: /bin/bash
+    

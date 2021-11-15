@@ -1,0 +1,29 @@
+---
+- name: Installing node exporter
+  hosts: 
+    - 34.192.151.138
+    - 44.198.105.77
+    - 52.207.158.23
+    - 54.92.233.212
+    - 204.236.226.148
+  become: true
+  tasks:
+    - name: Copying docker compose file
+      copy:
+        src: docker-node-exporter
+        dest: /home/ubuntu/
+    
+    - name: Stop container
+      shell: "docker stop node_exporter"
+      args:
+        executable: /bin/bash
+    
+    - name: Remove container
+      shell: "docker rm node_exporter"
+      args:
+        executable: /bin/bash
+
+    - name: Run docker compose
+      shell: 
+        cmd: "docker-compose -f docker-compose.yml up -d"
+        chdir: /home/ubuntu/docker-node-exporter/

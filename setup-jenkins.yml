@@ -5,9 +5,14 @@
   tasks:
     - name: Copy docker compose
       copy:
-        src: docker-jenkins/docker-compose.yml 
+        src: docker-jenkins
         dest: /home/ubuntu/
     
+    - name: Initialize data
+      shell: cd docker-node-exporter
+      args:
+        executable: /bin/bash
+
     - name: Run docker compose
       shell: "docker-compose up -d"
       args:

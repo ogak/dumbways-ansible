@@ -1,0 +1,14 @@
+---
+- name: Stop node exporter
+  hosts: 
+    - 34.192.151.138
+    - 44.198.105.77
+    - 52.207.158.23
+    - 54.92.233.212
+    - 204.236.226.148
+  become: true
+  tasks:
+    - name: Stop node exporter service
+      shell: "sudo systemctl stop node_exporter.service"
+      args:
+        executable: /bin/bash
